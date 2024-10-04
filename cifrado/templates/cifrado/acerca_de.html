@@ -1,0 +1,110 @@
+{% extends 'cifrado/index.html' %}
+{% load static %}  <!-- Asegúrate de cargar el tag de static -->
+{% block content %}
+<style>
+    .acerca-del-autor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        background-color: #e77fee2a;
+        margin-top: 20px;
+    }
+
+    .titulo-acerca, .titulo-comparacion {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .autor-card {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .autor-foto {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .autor-info p {
+        font-size: 16px;
+        margin: 5px 0;
+        font-weight: bold;
+    }
+
+    .comparacion-cifrado {
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #f3f3f3;
+        border-radius: 12px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .comparacion-card {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .cifrado-item {
+        width: 30%;
+        text-align: center;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .cifrado-item h4 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .cifrado-item p {
+        font-size: 14px;
+    }
+</style>
+
+<div class="container acerca-del-autor">
+    <h2 class="titulo-acerca">Autora</h2>
+    <div class="autor-card">
+        <img src="{% static 'cifrado/imagenes/autor.jpg' %}" alt="Foto del Autor" class="autor-foto">
+        <div class="autor-info">
+            <p><strong>Universidad:</strong> Universidad Tecnológica de la Huasteca Hidalguense</p> 
+            <p><strong>Carrera:</strong> Ingeniería en desarrollo y gestión de software</p>
+            <p><strong>Nombre:</strong> Marlen Hernandez Hernandez</p>
+            <p><strong>Cuatrimestre:</strong> 7mo</p>
+            <p><strong>Grupo:</strong> A</p>
+        </div>
+    </div>
+</div>
+
+<!-- Sección de comparación de cifrados -->
+<div class="container comparacion-cifrado">
+    <h2 class="titulo-comparacion">Comparación de Cifrados</h2>
+    <div class="comparacion-card">
+        <div class="cifrado-item">
+            <h4>Cifrado Simétrico AES</h4>
+            <p>El cifrado AES (Advanced Encryption Standard) es un algoritmo simétrico ampliamente utilizado para proteger datos. Su clave de cifrado y descifrado es la misma, lo que lo hace rápido y eficiente para grandes cantidades de datos.</p>
+        </div>
+        <div class="cifrado-item">
+            <h4>Firma Digital Schnorr</h4>
+            <p>La firma digital Schnorr se utiliza para validar la autenticidad y la integridad de un mensaje. Es un algoritmo criptográfico asimétrico que utiliza una clave privada para firmar el mensaje y una clave pública para verificarlo.</p>
+        </div>
+        <div class="cifrado-item">
+            <h4>Hash MD5</h4>
+            <p>MD5 (Message Digest Algorithm 5) es un algoritmo hash que produce un resumen de 128 bits. Aunque se considera débil frente a ataques de colisión, sigue siendo útil para verificar la integridad de archivos pequeños.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

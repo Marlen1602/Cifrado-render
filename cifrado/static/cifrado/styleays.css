@@ -1,0 +1,27 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.result, .decrypted-result {
+    margin-top: 20px;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.decrypted-result div {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}

@@ -1,0 +1,101 @@
+{% extends 'cifrado/index.html' %}
+{% load static %}
+{% block content %}
+<h1>Cifrado de Datos Django</h1>
+    <div class="container">
+        <div class="row">
+            <!-- Formulario de cifrado -->
+            <div class="col-md-6">
+                <h2>Cifrado AES</h2>
+                <form method="POST" action="{% url 'cifrado_ays' %}">
+                    {% csrf_token %}
+                    {{ aes_form.as_p }}
+                    <button type="submit" name="operation" value="cifrar" class="btn btn-success btn-block">Cifrar</button>
+                </form>
+
+                <h2>Resultado</h2>
+                <div class="result" style="overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; padding: 10px; border-radius: 8px;">
+                    {% if result %}
+                        <div style="background-color: #f1f1f1; padding: 10px; border-radius: 8px;">
+                            <p><strong>Nombre Encriptado:</strong> {{ result.Nombre_Encriptado }}</p>
+                            <p><strong>Teléfono Encriptado:</strong> {{ result.Telefono_Encriptado }}</p>
+                            <p><strong>Email Encriptado:</strong> {{ result.Email_Encriptado }}</p>
+                            <p><strong>Dirección Encriptada:</strong> {{ result.Direccion_Encriptada }}</p>
+                            <p><strong>Contraseña Encriptada:</strong> {{ result.Contraseña_Encriptada }}</p>
+                        </div>
+                    {% else %}
+                        <p>No hay resultados aún.</p>
+                    {% endif %}
+                </div>                
+            </div>
+
+            <!-- Formulario de descifrado -->
+            <div class="col-md-6">
+                <h2>Descifrar Datos</h2>
+                <form method="POST" action="{% url 'cifrado_ays' %}">
+                    {% csrf_token %}
+                    <label for="key">Clave de Descifrado:</label>
+                    <input type="text" name="key" id="key" placeholder="Ingresa la clave para descifrar">
+                    <button type="submit" name="operation" value="descifrar" class="btn btn-success btn-block">Descifrar</button>
+                </form>
+                <div class="decrypted-result">
+                    <h3>Datos Descifrados</h3>
+                    {% if decrypted.error %}
+                        <p style="color: red;">{{ decrypted.error }}</p>
+                    {% elif decrypted.Nombre %}
+                        <div style="background-color: #f1f1f1; padding: 10px; border-radius: 8px;">
+                            <p><strong>Nombre:</strong> {{ decrypted.Nombre }}</p>
+                            <p><strong>Email:</strong> {{ decrypted.Email }}</p>
+                            <p><strong>Teléfono:</strong> {{ decrypted.Telefono }}</p>
+                            <p><strong>Dirección:</strong> {{ decrypted.Direccion }}</p>
+                            <p><strong>Contraseña:</strong> {{ decrypted.Contraseña }}</p>
+                        </div>
+                    {% else %}
+                        <p>No hay datos descifrados.</p>
+                    {% endif %}
+                </div>
+            </div>
+                 <!-- Formulario de Firma Digital Schnorr -->
+        <div class="col-md-12 mt-5">
+            <h2>Firma Digital Schnorr</h2>
+            <form method="POST" action="{% url 'cifrado_ays' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="message">Mensaje a firmar:</label>
+                        <input type="text" name="message" id="message" placeholder="Ingresa el mensaje a firmar" class="form-control mb-3">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="prime_number">Número Primo:</label>
+                        <input type="number" name="prime_number" id="prime_number" placeholder="Número primo" class="form-control mb-3">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="generator">Generador (g):</label>
+                        <input type="number" name="generator" id="generator" placeholder="Ingresa el generador (g)" class="form-control mb-3">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="private_key">Clave Privada:</label>
+                        <input type="number" name="private_key" id="private_key" placeholder="Ingresa la clave privada" class="form-control mb-3">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="public_key">Clave Pública:</label>
+                        <input type="number" name="public_key" id="public_key" placeholder="Ingresa la clave pública" class="form-control mb-3">
+                    </div>
+                </div>
+                <button type="submit" name="operation" value="generar_firma" class="btn btn-success btn-block">Generar Firma</button>
+            </form>
+
+            <!-- Resultados de la firma digital Schnorr -->
+            <div class="result mt-4">
+                {% if schnorr_result.Schnorr_Signature %}
+                    <h3>Resultado de la Firma:</h3>
+                    <p><strong>Firma:</strong> {{ schnorr_result.Schnorr_Signature }}</p>
+                    <p><strong>Verificación:</strong> {{ schnorr_result.Verification }}</p>
+                {% else %}
+                    <p>No se ha generado una firma aún.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

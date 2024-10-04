@@ -1,0 +1,57 @@
+{% extends 'cifrado/index.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cifrado/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Aplicación de Cifrado</h1>
+        <!-- Botón para mostrar instrucciones -->
+    <button class="instructions-btn" onclick="toggleInstructions()">Instrucciones</button>
+
+    <!-- Caja de instrucciones -->
+    <div class="instructions-box" id="instructionsBox">
+        <button class="close-btn" onclick="toggleInstructions()">X</button>
+        <p>1.- Selecciona el tipo de cifrado: Cifrado César o Escítala.</br>
+        2.-Ingresa el texto que deseas cifrar o descifrar.</br>
+        3.- Proporciona los parámetros adecuados (clave, desplazamiento, o el tamaño del cilindro, según el método elegido).</br>
+        4.- Aplica el cifrado o descifrado sobre el texto usando el método seleccionado.</p>
+    </div>
+
+    <!-- Selector de cifrado -->
+    <label for="tipoCifrado">Selecciona el tipo de cifrado:</label>
+    <select id="tipoCifrado">
+        <option value="cesar">Cifrado César</option>
+        <option value="escitala">Cifrado Escítala</option>
+    </select>
+
+    <!-- Formulario -->
+    <div class="form-row">
+        <input type="text" id="texto" placeholder="Introduce el texto a cifrar/descifrar...">
+        <input type="number" id="columnas" value="3" min="1" placeholder="Desplazamiento/Columnas">
+    </div>
+
+    <div class="buttons-row">
+        <button onclick="cifrar()">Cifrar</button>
+        <button onclick="descifrar()">Descifrar</button>
+    </div>
+
+    <!-- Resultado -->
+    <div class="result-section">
+        <p>Resultado:</p>
+        <div id="resultado"></div>
+        <button class="copy-btn" onclick="copiarResultado()">Copiar</button>
+    </div>
+    </div>
+    <script src="{% static 'cifrado/scripts.js' %}"></script>
+       </body>
+    </html>
+    {% endblock %}
+    
+    
